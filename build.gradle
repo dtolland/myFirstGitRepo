@@ -33,7 +33,7 @@ release {
 	newVersionCommitMessage = project.ext.snapshotMessage
 }
 
-uploadArchives.dependsOn artifactory
+afterReleaseBuild.dependsOn artifactory
 
 publishing { 
     publications {
