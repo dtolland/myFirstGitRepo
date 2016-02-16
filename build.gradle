@@ -7,11 +7,9 @@ repositories {
 	jcenter()
 }
 
-
-
 jar {
 
-	baseName = project.ext.name
+	baseName = rootProject.name
 	manifest {
         attributes 'Main-Class': 'com.dtolland.DoIt'
     }
@@ -19,8 +17,12 @@ jar {
 
 release {
 	tagTemplate = '$name-$version'
-	preCommitText = 'MyPreCommitText'
-	preTagCommitMessage = 'MyPreTagCommitMessage'
-	tagCommitMessage = 'MyTagCommitMessage'
-	newVersionCommitMessage = 'MyNewVersionCommitMessage'
+	tagCommitMessage = ''
+	
+	preCommitText = project.ext.company
+	preTagCommitMessage = 'New Release Version'
+	newVersionCommitMessage = 'New Snapshot Version'
+
+
+	failOnCommitNeeded = false
 }
