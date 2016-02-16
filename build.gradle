@@ -33,6 +33,8 @@ release {
 	newVersionCommitMessage = project.ext.snapshotMessage
 }
 
+uploadArchives.dependsOn artifactory
+
 publishing { 
     publications {
         doIt(MavenPublication) {
