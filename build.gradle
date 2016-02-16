@@ -9,7 +9,7 @@ repositories {
 
 jar {
 
-	baseName = rootProject.name
+	baseName = $name
 	manifest {
         attributes 'Main-Class': 'com.dtolland.DoIt'
     }
@@ -20,9 +20,7 @@ release {
 	tagCommitMessage = ''
 	
 	preCommitText = project.ext.company
-	preTagCommitMessage = 'New Release Version'
-	newVersionCommitMessage = 'New Snapshot Version'
 
-
-	failOnCommitNeeded = false
+	preTagCommitMessage = 'New Release'
+	newVersionCommitMessage = 'New Snapshot'
 }
