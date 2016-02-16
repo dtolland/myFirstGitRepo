@@ -18,7 +18,7 @@ jar {
 }
 
 release {
-	tagTemplate = '$project.ext.name-$version'
+	tagTemplate = '$name-$version'
 	preCommitText = 'MyPreCommitText'
 	preTagCommitMessage = 'MyPreTagCommitMessage'
 	tagCommitMessage = 'MyTagCommitMessage'
