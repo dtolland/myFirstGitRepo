@@ -1,15 +1,20 @@
 plugins {
-  id 'java'
+  id 'org.gradle.java'
+  id 'org.gradle.maven-publish'
   id 'net.researchgate.release' version '2.3.4'
+  id 'com.jfrog.artifactory' version '4.0.0'
 }
+
+def passwordProperty= project.hasProperty('pw') ? pw : "dummy"
 
 repositories {
-	jcenter()
+    jcenter()
+    maven {
+        url "http://artifactory.qmatic.com/artifactory/test"
+    }
 }
 
-jar {
-
-	baseName = '$name'
+task doItJar(type: Jar) {
 	manifest {
         attributes 'Main-Class': 'com.dtolland.DoIt'
     }
@@ -23,4 +28,34 @@ release {
 
 	preTagCommitMessage = 'New Release'
 	newVersionCommitMessage = 'New Snapshot'
+}
+
+artifacts {
+    archives doItJar
+}
+
+publishing { 
+    publications {
+        doitjar(MavenPublication) {
+            artifact doItJar
+            groupId "com.dtolland"
+            artifactId "$name"
+            version project.version
+        }
+    }
+}
+
+artifactory {
+    contextUrl = "http://artifactory.qmatic.com/artifactory"
+    publish {
+        repository {
+            repoKey = "test"
+            username = "github"
+            password = passwordProperty
+            maven = true
+        }
+        defaults {
+            publications('doitjar')
+        }
+    }
 }
