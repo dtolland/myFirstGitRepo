@@ -15,3 +15,10 @@ jar {
     }
 }
 
+release {
+	tagTemplate = '$jar.baseName-$version'
+	preCommitText = 'MyPreCommitText'
+	preTagCommitMessage = 'MyPreTagCommitMessage'
+	tagCommitMessage = 'MyTagCommitMessage'
+	newVersionCommitMessage = 'MyNewVersionCommitMessage'
+}
