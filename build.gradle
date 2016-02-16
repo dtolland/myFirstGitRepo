@@ -21,14 +21,16 @@ jar {
 }
 
 release {
-	//limited to 
+	//variables limited to $name and $version
+	//how can you publish in between tag and commit new snapshot?
+
 	tagTemplate = '$name-$version'
 	tagCommitMessage = ''
 	
 	preCommitText = project.ext.company
 
-	preTagCommitMessage = 'new release'
-	newVersionCommitMessage = 'new snapshot'
+	preTagCommitMessage = project.ext.releaseMessage
+	newVersionCommitMessage = project.ext.snapshotMessage
 }
 
 publishing { 
@@ -46,8 +48,8 @@ artifactory {
     contextUrl = project.ext.artifactoryUrl
     publish {
         repository {
-            repoKey = "test"
-            username = "github"
+            repoKey = project.ext.artifactoryRepo
+            username = project.ext.artifactoryUser
             password = passwordProperty
             maven = true
         }
