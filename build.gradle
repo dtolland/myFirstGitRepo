@@ -22,8 +22,6 @@ jar {
 
 release {
 	//variables limited to $name and $version
-	//how can you publish in between tag and commit new snapshot?
-
 	tagTemplate = '$name-$version'
 	tagCommitMessage = ''
 	
