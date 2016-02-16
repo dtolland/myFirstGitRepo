@@ -14,39 +14,36 @@ repositories {
     }
 }
 
-task doItJar(type: Jar) {
+jar {
 	manifest {
         attributes 'Main-Class': 'com.dtolland.DoIt'
     }
 }
 
 release {
+	//limited to 
 	tagTemplate = '$name-$version'
 	tagCommitMessage = ''
 	
 	preCommitText = project.ext.company
 
-	preTagCommitMessage = 'New Release'
-	newVersionCommitMessage = 'New Snapshot'
-}
-
-artifacts {
-    archives doItJar
+	preTagCommitMessage = 'new release'
+	newVersionCommitMessage = 'new snapshot'
 }
 
 publishing { 
     publications {
-        doitjar(MavenPublication) {
-            artifact doItJar
-            groupId "com.dtolland"
-            artifactId "$name"
+        doIt(MavenPublication) {
+            groupId project.ext.company
+            artifactId project.name
             version project.version
+            from components.java
         }
     }
 }
 
 artifactory {
-    contextUrl = "http://artifactory.qmatic.com/artifactory"
+    contextUrl = project.ext.artifactoryUrl
     publish {
         repository {
             repoKey = "test"
@@ -55,7 +52,7 @@ artifactory {
             maven = true
         }
         defaults {
-            publications('doitjar')
+            publications('doIt')
         }
     }
 }
