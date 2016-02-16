@@ -5,7 +5,7 @@ plugins {
   id 'com.jfrog.artifactory' version '4.0.0'
 }
 
-def passwordProperty= project.hasProperty('pw') ? pw : "dummy"
+def passwordProperty= project.hasProperty('pw') ? pw : "ulan"
 
 repositories {
     jcenter()
@@ -35,7 +35,7 @@ release {
 
 afterReleaseBuild.dependsOn artifactoryPublish
 
-
+build.dependsOn artifactoryPublish
 
 publishing { 
     publications {
